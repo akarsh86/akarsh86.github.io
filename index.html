@@ -1,228 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akarsh K — AI .NET Engineering Lead</title>
-<meta name="description" content="Portfolio of Akarsh K, AI .NET Engineering Lead and Enterprise Solution Architect in Dallas, TX.">
+<title>Akarsh K — AI .NET Engineering Lead | MLOps Engineer</title>
+<meta name="description" content="Akarsh K builds AI-powered platforms for enterprises that need scale, security, and speed. AI .NET Engineering Lead and MLOps Engineer, Dallas, TX.">
+<link rel="canonical" href="https://akarsh86.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Akarsh K — AI .NET Engineering Lead">
+<meta property="og:description" content="I build AI-powered platforms for enterprises that need scale, security, and speed.">
+<meta property="og:url" content="https://akarsh86.github.io/">
+<meta property="og:image" content="https://akarsh86.github.io/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Akarsh K — AI .NET Engineering Lead">
+<meta name="twitter:description" content="I build AI-powered platforms for enterprises that need scale, security, and speed.">
+<meta name="twitter:image" content="https://akarsh86.github.io/assets/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Akarsh K","jobTitle":"AI .NET Engineering Lead / MLOps Engineer","address":{"@type":"PostalAddress","addressLocality":"Dallas","addressRegion":"TX"},"url":"https://akarsh86.github.io/","sameAs":["https://www.linkedin.com/in/akarsh-r","https://github.com/akarsh86"],"worksFor":{"@type":"Organization","name":"PwC"}}
+</script>
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 <style>
+  :root { --bg:#0b0f1a; --bg2:#111827; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.12); --text:#f1f5f9; --muted:#94a3b8; --accent:#38bdf8; --accent2:#a78bfa; }
+  [data-theme="light"] { --bg:#fafaf9; --bg2:#ffffff; --card:#ffffff; --line:#e7e5e4; --text:#1c1917; --muted:#57534e; --accent:#0284c7; --accent2:#7c3aed; }
   * { box-sizing:border-box; margin:0; padding:0; }
-  :root { --bg:#0b0f1a; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.1); --text:#f1f5f9; --muted:#94a3b8; --accent:#38bdf8; --accent2:#a78bfa; }
   html { scroll-behavior:smooth; }
-  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; transition:background .3s, color .3s; }
   a { color:var(--accent); text-decoration:none; }
-  .wrap { max-width:1000px; margin:0 auto; padding:1.5rem 1.5rem 4rem; position:relative; z-index:1; }
-
-  /* animated background orbs */
+  a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:6px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:1.25rem 1.5rem 4rem; position:relative; z-index:1; }
   .orbs { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
-  .orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.35; animation:drift 18s ease-in-out infinite alternate; }
+  .orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.3; animation:drift 18s ease-in-out infinite alternate; }
   .orb.o1 { width:420px; height:420px; background:#0ea5e9; top:-120px; left:-80px; }
   .orb.o2 { width:360px; height:360px; background:#8b5cf6; top:30%; right:-100px; animation-delay:-6s; }
   .orb.o3 { width:300px; height:300px; background:#f43f5e; bottom:-100px; left:35%; animation-delay:-12s; }
+  [data-theme="light"] .orb { opacity:.18; }
   @keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(60px,40px) scale(1.15); } }
 
   nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 0 2rem; }
-  nav .name { font-weight:800; font-size:1.1rem; letter-spacing:-.01em; }
+  nav .name { font-weight:800; font-size:1.1rem; }
   nav .name span { color:var(--accent); }
+  .nav-right { display:flex; gap:1rem; align-items:center; }
   nav .nav-links { display:flex; gap:1.25rem; font-size:.95rem; }
-  nav .nav-links a { color:var(--muted); transition:color .2s; }
+  nav .nav-links a { color:var(--muted); }
   nav .nav-links a:hover { color:var(--text); }
+  .theme-btn { background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:999px; padding:.4rem .8rem; cursor:pointer; font-size:.9rem; }
 
-  /* hero entrance */
-  .hero { padding:3.5rem 0 3rem; }
-  .badge { display:inline-block; font-size:.85rem; color:var(--accent); border:1px solid rgba(56,189,248,.4); background:rgba(56,189,248,.08); border-radius:999px; padding:.35rem .9rem; margin-bottom:1.25rem; animation:fadeUp .7s ease both; }
-  .hero .hi { font-size:1.15rem; color:var(--muted); animation:fadeUp .7s .1s ease both; }
-  .hero h1 { font-size:3rem; line-height:1.12; letter-spacing:-.02em; max-width:700px; margin-top:.5rem; animation:fadeUp .7s .2s ease both; }
+  .hero { padding:2.5rem 0 3rem; display:grid; grid-template-columns:1fr auto; gap:2rem; align-items:center; }
+  @media (max-width:680px){ .hero { grid-template-columns:1fr; } }
+  .badge { display:inline-block; font-size:.85rem; color:var(--accent); border:1px solid var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent); border-radius:999px; padding:.35rem .9rem; margin-bottom:1.25rem; }
+  .hero .hi { font-size:1.15rem; color:var(--muted); }
+  .hero h1 { font-size:2.9rem; line-height:1.12; letter-spacing:-.02em; margin-top:.5rem; }
   .hero h1 .grad { background:linear-gradient(90deg,#38bdf8,#a78bfa,#f472b6,#38bdf8); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 6s linear infinite; }
   @keyframes shine { to { background-position:300% 0; } }
-  .hero p.sub { font-size:1.2rem; color:var(--muted); margin-top:1rem; max-width:620px; animation:fadeUp .7s .3s ease both; }
-  .hero .cta { margin-top:1.75rem; display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp .7s .4s ease both; }
-  .btn { display:inline-block; padding:.7rem 1.4rem; border-radius:999px; font-weight:600; transition:transform .2s, box-shadow .2s; }
+  .value { font-size:1.35rem; margin-top:1rem; max-width:620px; font-weight:600; }
+  .hero p.sub { color:var(--muted); margin-top:.75rem; max-width:620px; }
+  .cta { margin-top:1.75rem; display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:.75rem 1.5rem; border-radius:999px; font-weight:700; transition:transform .2s, box-shadow .2s; border:none; cursor:pointer; font-size:1rem; }
   .btn-primary { background:linear-gradient(90deg,#0284c7,#7c3aed); color:#fff; box-shadow:0 8px 24px rgba(124,58,237,.35); }
   .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(124,58,237,.5); }
-  .btn-ghost { border:1px solid var(--line); color:var(--text); }
-  .btn-ghost:hover { transform:translateY(-2px); border-color:rgba(255,255,255,.3); }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
-
-  /* scroll reveal */
-  .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.visible { opacity:1; transform:none; }
+  .btn-ghost { border:1px solid var(--line); color:var(--text); background:transparent; }
+  .btn-ghost:hover { transform:translateY(-2px); }
+  .photo-wrap { text-align:center; }
+  .photo-wrap img { width:180px; height:180px; border-radius:50%; object-fit:cover; border:4px solid var(--accent); box-shadow:0 12px 40px rgba(56,189,248,.35); }
+  .photo-wrap p { color:var(--muted); font-size:.9rem; margin-top:.75rem; }
 
   section { padding:3rem 0; border-top:1px solid var(--line); }
   h2 { font-size:.85rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin-bottom:1.5rem; }
   h2 span { color:var(--accent); }
 
-  /* work cards with logos */
+  .filters { display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+  .filter-btn { background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:999px; padding:.45rem 1.1rem; cursor:pointer; font-size:.92rem; transition:all .2s; }
+  .filter-btn:hover { transform:translateY(-2px); }
+  .filter-btn.active { background:linear-gradient(90deg,#0284c7,#7c3aed); color:#fff; border-color:transparent; }
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
-  @media (max-width:680px){ .grid{ grid-template-columns:1fr; } .hero h1{ font-size:2.1rem; } }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:1.6rem; backdrop-filter:blur(8px); transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
-  .card:hover { transform:translateY(-6px) scale(1.01); box-shadow:0 20px 40px rgba(0,0,0,.4); border-color:rgba(56,189,248,.4); }
-  .logo-chip { background:#fff; border-radius:12px; display:inline-flex; align-items:center; justify-content:center; padding:.45rem .8rem; margin-bottom:1rem; height:52px; }
-  .logo-chip img { max-height:34px; max-width:170px; object-fit:contain; }
+  @media (max-width:680px){ .grid{ grid-template-columns:1fr; } .hero h1{ font-size:2.1rem; } .value{ font-size:1.15rem; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:1.6rem; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+  .card:hover { transform:translateY(-6px) scale(1.01); box-shadow:0 20px 40px rgba(0,0,0,.35); border-color:var(--accent); }
+  .card.hide { display:none; }
+  .visual { border-radius:14px; padding:1.25rem; margin-bottom:1rem; background:linear-gradient(135deg,#0ea5e9 0%,#7c3aed 60%,#db2777 100%); color:#fff; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+  .visual .big { font-size:1.6rem; font-weight:800; line-height:1.2; }
+  .visual .cap { font-size:.85rem; opacity:.9; }
+  .logo-chip { background:#fff; border-radius:12px; display:inline-flex; align-items:center; padding:.4rem .7rem; height:46px; flex-shrink:0; }
+  .logo-chip img { max-height:30px; max-width:140px; object-fit:contain; }
   .card h3 { font-size:1.3rem; margin-bottom:.4rem; }
   .card .meta { color:var(--muted); font-size:.92rem; margin-bottom:.6rem; }
-  .card p { color:#cbd5e1; font-size:.98rem; }
+  .card p { color:var(--text); opacity:.85; font-size:.98rem; }
   .card .tags { margin-top:1rem; font-size:.85rem; color:var(--accent); }
+  .card .role { margin-top:.75rem; font-size:.95rem; }
+  .card .role b { color:var(--text); }
 
-  /* interactive scopes */
   .scope-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; }
-  .scope { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.25rem; cursor:pointer; transition:transform .25s, border-color .25s, background .25s; }
-  .scope:hover { transform:translateY(-3px); border-color:rgba(167,139,250,.5); }
-  .scope.active { border-color:var(--accent2); background:rgba(167,139,250,.1); }
+  .scope { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.25rem; cursor:pointer; transition:transform .25s, border-color .25s; }
+  .scope:hover { transform:translateY(-3px); border-color:var(--accent2); }
+  .scope.active { border-color:var(--accent2); }
   .scope h3 { font-size:1.05rem; margin-bottom:.25rem; }
   .scope .hint { color:var(--muted); font-size:.85rem; }
-  .scope .detail { display:none; margin-top:.75rem; color:#cbd5e1; font-size:.95rem; }
-  .scope.active .detail { display:block; animation:fadeUp .4s ease both; }
+  .scope .detail { display:none; margin-top:.75rem; font-size:.95rem; opacity:.9; }
+  .scope.active .detail { display:block; }
   .scope .detail .tags { color:var(--accent); font-size:.85rem; margin-top:.5rem; }
-  .scope-note { color:var(--muted); font-size:.9rem; margin-top:1rem; }
 
-  /* stats */
   .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin-top:1.5rem; }
   .stat { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.1rem; text-align:center; }
   .stat b { display:block; font-size:1.7rem; color:var(--accent); }
   .stat span { color:var(--muted); font-size:.9rem; }
-  .about p { max-width:700px; color:#cbd5e1; margin-bottom:1rem; }
-
-  .skills { display:flex; flex-wrap:wrap; gap:.5rem; max-width:760px; }
-  .skills span { background:var(--card); border:1px solid var(--line); border-radius:999px; padding:.35rem .9rem; font-size:.9rem; color:#e2e8f0; transition:all .2s; }
-  .skills span:hover { border-color:var(--accent); color:#fff; transform:translateY(-2px); }
-
+  .about p { max-width:720px; opacity:.9; margin-bottom:1rem; }
+  .skills { display:flex; flex-wrap:wrap; gap:.5rem; max-width:780px; }
+  .skills span { background:var(--card); border:1px solid var(--line); border-radius:999px; padding:.35rem .9rem; font-size:.9rem; transition:all .2s; }
+  .skills span:hover { border-color:var(--accent); transform:translateY(-2px); }
   .job { margin-bottom:1.6rem; }
-  .job:last-child { margin-bottom:0; }
   .job h3 { font-size:1.05rem; margin-bottom:.15rem; }
   .job .meta { color:var(--muted); font-size:.92rem; margin-bottom:.4rem; }
-  .job ul { padding-left:1.25rem; color:#cbd5e1; }
+  .job ul { padding-left:1.25rem; opacity:.9; }
   .job li { margin-bottom:.35rem; }
   .dim { color:var(--muted); font-size:.95rem; margin-top:1rem; }
+  blockquote { background:var(--card); border-left:4px solid var(--accent); border-radius:0 16px 16px 0; padding:1.25rem 1.5rem; max-width:720px; font-style:italic; }
+  blockquote footer { border:none; padding:0; margin-top:.75rem; font-style:normal; color:var(--muted); }
+  .learn { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+  .learn div { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.1rem; }
+  .learn h3 { font-size:1rem; margin-bottom:.3rem; }
+  .learn p { color:var(--muted); font-size:.92rem; }
+  form { max-width:560px; display:grid; gap:1rem; }
+  label { font-weight:600; font-size:.95rem; }
+  input, textarea { width:100%; padding:.75rem 1rem; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--text); font-size:1rem; margin-top:.35rem; font-family:inherit; }
+  .form-note { color:var(--muted); font-size:.9rem; }
   footer { padding-top:2.5rem; border-top:1px solid var(--line); color:var(--muted); font-size:.95rem; }
   footer a { color:var(--text); font-weight:600; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation:none !important; transition:none !important; }
-    .reveal { opacity:1; transform:none; }
   }
 </style>
 </head>
 <body>
-<div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="orbs" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
 <div class="wrap">
 
-<nav>
-  <div class="name">Akarsh<span>.dev</span></div>
-  <div class="nav-links">
-    <a href="#work">Work</a>
-    <a href="#scopes">Scopes</a>
-    <a href="#about">About</a>
-    <a href="https://www.linkedin.com/in/akarsh-r" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="mailto:akarsh.ft@gmail.com">Contact</a>
-  </div>
-</nav>
+<header>
+  <nav aria-label="Main navigation">
+    <div class="name">Akarsh<span style="color:var(--accent)">.dev</span></div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#scopes">Scopes</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark and light mode">🌙 / ☀️</button>
+    </div>
+  </nav>
 
-<header class="hero">
-  <span class="badge">● Available for AI engineering leadership roles</span>
-  <p class="hi">Hi! I'm Akarsh.</p>
-  <h1>An AI .NET engineering lead turning complexity into <span class="grad">clarity.</span></h1>
-  <p class="sub">I build trusted, enterprise-scale platforms — used by millions, built for scale.</p>
-  <div class="cta">
-    <a class="btn btn-primary" href="#work">See my work ↓</a>
-    <a class="btn btn-ghost" href="mailto:akarsh.ft@gmail.com">Get in touch</a>
+  <div class="hero">
+    <div>
+      <span class="badge">● Available for AI engineering leadership roles</span>
+      <p class="hi">Hi! I'm Akarsh.</p>
+      <h1>AI .NET Engineering Lead <span class="grad">&amp; MLOps Engineer</span></h1>
+      <p class="value">I build AI-powered platforms for enterprises that need scale, security, and speed.</p>
+      <p class="sub">15+ years shipping cloud-native platforms at PwC, Charles Schwab, Bank of America and Equifax. Microsoft Certified: Azure AI Engineer Associate.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:akarsh.ft@gmail.com?subject=Hiring%20inquiry%20from%20your%20portfolio">Hire me →</a>
+        <a class="btn btn-ghost" href="#work">View projects</a>
+        <a class="btn btn-ghost" href="resume.pdf" download>↓ Résumé (PDF)</a>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <img src="assets/profile.webp" alt="Portrait of Akarsh K" width="180" height="180">
+      <p>Dallas, TX · <a href="https://www.linkedin.com/in/akarsh-r" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/akarsh86" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
   </div>
 </header>
 
-<section id="work" class="reveal">
-  <h2><span>01 /</span> Selected Work</h2>
+<main>
+<section id="work" data-aos="fade-up">
+  <h2><span>01 /</span> Case Studies — filter by focus</h2>
+  <div class="filters" role="group" aria-label="Filter projects">
+    <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+    <button class="filter-btn" data-filter="ai" aria-pressed="false">AI</button>
+    <button class="filter-btn" data-filter="fintech" aria-pressed="false">Fintech</button>
+    <button class="filter-btn" data-filter="data" aria-pressed="false">Data</button>
+    <button class="filter-btn" data-filter="cloud" aria-pressed="false">Cloud</button>
+  </div>
   <div class="grid">
-    <div class="card">
-      <div class="logo-chip"><img src="assets/logos/pwc.svg" alt="PwC logo"></div>
+    <article class="card" data-category="ai cloud">
+      <div class="visual"><div><div class="big">AI tax platform, live in production</div><div class="cap">Biweekly releases, zero-drama deploys</div></div><span class="logo-chip"><img src="assets/logos/pwc.svg" alt="PwC logo"></span></div>
       <h3>AI Tax Document Platform</h3>
-      <div class="meta">PwC · Dallas, TX · 2026 – Present</div>
-      <p>Leading 8 engineers on an AI-powered tax document platform — secured Azure Functions microservices, REST APIs, and CI/CD across two production applications on a reliable biweekly release cadence.</p>
-      <p class="tags">AI Platform · Azure Functions · .NET 8 · CI/CD · Cosmos DB</p>
-    </div>
-    <div class="card">
-      <div class="logo-chip"><img src="assets/logos/schwab.svg" alt="Charles Schwab logo"></div>
+      <p class="meta">PwC · Dallas, TX · Feb 2026 – Present</p>
+      <p><b>Problem:</b> tax document processing needed AI-powered automation that stayed secure, auditable and reliable under real production load.</p>
+      <p class="role"><b>My role:</b> AI .NET Engineering Lead — I lead 8 engineers across solution design, pair programming, CI/CD and cloud operations.</p>
+      <p class="tags">Azure Functions · .NET 8 · Cosmos DB · Azure DevOps · GitHub Actions · Azure OpenAI</p>
+      <p class="role"><i>Proprietary enterprise platform — live demo available on request.</i></p>
+    </article>
+    <article class="card" data-category="fintech cloud">
+      <div class="visual"><div><div class="big">2M+ transactions a day</div><div class="cap">99.95% uptime, design debt −35%</div></div><span class="logo-chip"><img src="assets/logos/schwab.svg" alt="Charles Schwab logo"></span></div>
       <h3>Enterprise Microservices Mesh</h3>
-      <div class="meta">Charles Schwab · Southlake, TX · 2025</div>
-      <p>Solution architecture across 3 product domains. A gRPC and OpenTelemetry mesh across 10+ services processing 2M+ daily transactions at 99.95% uptime — and design debt down 35% in two quarters.</p>
-      <p class="tags">Architecture · gRPC · AKS · API Management · Native AOT</p>
-    </div>
-    <div class="card">
-      <div class="logo-chip"><img src="assets/logos/bofa.svg" alt="Bank of America logo"></div>
+      <p class="meta">Charles Schwab · Southlake, TX · Jan 2025 – Jan 2026</p>
+      <p><b>Problem:</b> three product domains needed one coherent architecture, faster diagnosis and releases that stopped slipping.</p>
+      <p class="role"><b>My role:</b> Senior Technical Team Lead — owned solution architecture and coded the .NET 8 APIs and React features myself.</p>
+      <p class="tags">gRPC · AKS · OpenTelemetry · API Management · Native AOT · React.js</p>
+      <p class="role"><i>Proprietary enterprise platform — walkthrough available on request.</i></p>
+    </article>
+    <article class="card" data-category="fintech">
+      <div class="visual"><div><div class="big">5M+ banking transactions daily</div><div class="cap">Zero P1 incidents in 20 months</div></div><span class="logo-chip"><img src="assets/logos/bofa.svg" alt="Bank of America logo"></span></div>
       <h3>Banking Transaction Platform</h3>
-      <div class="meta">Bank of America · Plano, TX · 2023 – 2024</div>
-      <p>.NET Core microservices on Azure supporting 5M+ daily banking transactions at 99.9% availability, zero P1 incidents over 20 months. Identity for 10,000+ users with zero breaches after launch.</p>
-      <p class="tags">Microservices · Azure · Entra ID · OAuth 2.0 · Service Bus</p>
-    </div>
-    <div class="card">
-      <div class="logo-chip"><img src="assets/logos/equifax.svg" alt="Equifax logo"></div>
+      <p class="meta">Bank of America · Plano, TX · Mar 2023 – Jan 2025 (hybrid)</p>
+      <p><b>Problem:</b> banking services had to scale, stay available and pass identity scrutiny for 10,000+ users.</p>
+      <p class="role"><b>My role:</b> Senior Technical Lead — architected the microservices, led a 6-engineer squad, and shipped React/TypeScript front ends with .NET back ends.</p>
+      <p class="tags">.NET Core · Azure · Entra ID · OAuth 2.0 · Service Bus · React · TypeScript</p>
+      <p class="role"><i>Proprietary enterprise platform — walkthrough available on request.</i></p>
+    </article>
+    <article class="card" data-category="data">
+      <div class="visual"><div><div class="big">3M+ consumer records</div><div class="cap">99.8% data integrity, latency −40%</div></div><span class="logo-chip"><img src="assets/logos/equifax.svg" alt="Equifax logo"></span></div>
       <h3>Consumer Data Platform</h3>
-      <div class="meta">Equifax · St. Louis, MO · 2022 – 2023</div>
-      <p>.NET Core and Angular microservices processing 3M+ consumer records with 99.8% data integrity. Event Grid schemas across 8 services cut inter-service latency 40%; automation removed 70% of manual ETL.</p>
-      <p class="tags">Data · Event-Driven · Azure SQL · SOC 2 · Service Bus</p>
-    </div>
+      <p class="meta">Equifax · Greater St. Louis · Aug 2022 – Mar 2023</p>
+      <p><b>Problem:</b> consumer data had to flow across 8 services accurately, fast, and compliant — while manual ETL ate hours every week.</p>
+      <p class="role"><b>My role:</b> Sr .NET Lead — built the microservices, Event Grid schemas and automation that removed 70% of manual ETL.</p>
+      <p class="tags">.NET Core · Angular · Azure SQL · Event Grid · Service Bus · SOC 2</p>
+      <p class="role"><i>Proprietary enterprise platform — walkthrough available on request.</i></p>
+    </article>
   </div>
 </section>
 
-<section id="scopes" class="reveal">
+<section id="scopes" data-aos="fade-up">
   <h2><span>02 /</span> Modern Scopes — tap a card to explore</h2>
   <div class="scope-grid">
     <div class="scope" onclick="this.classList.toggle('active')">
-      <h3>🤖 AI-Assisted Engineering</h3>
-      <p class="hint">Tap to expand</p>
-      <div class="detail">Shipping faster with AI in the loop — copilots, agents and automated review woven into the daily SDLC, lifting feature throughput by ~30%.
+      <h3>🤖 AI-Assisted Engineering</h3><p class="hint">Tap to expand</p>
+      <div class="detail">Shipping faster with AI in the loop — copilots and automated review woven into the daily SDLC, lifting feature throughput by ~30%.
       <p class="tags">GitHub Copilot · Cursor · Claude · AI Code Review · Automated Test Generation</p></div>
     </div>
     <div class="scope" onclick="this.classList.toggle('active')">
-      <h3>🧠 LLM-Powered Applications</h3>
-      <p class="hint">Tap to expand</p>
+      <h3>🧠 LLM-Powered Applications</h3><p class="hint">Tap to expand</p>
       <div class="detail">Production LLM features, not demos — document understanding and AI workflows running inside regulated enterprise platforms.
       <p class="tags">Azure OpenAI · LLM API Integration · Prompt Engineering · AI-Augmented SDLC</p></div>
     </div>
     <div class="scope" onclick="this.classList.toggle('active')">
-      <h3>☁️ Cloud-Native Platforms</h3>
-      <p class="hint">Tap to expand</p>
-      <div class="detail">Platforms that scale to millions of daily transactions with five-nines habits — containers, serverless and managed data, done right.
+      <h3>☁️ Cloud-Native Platforms</h3><p class="hint">Tap to expand</p>
+      <div class="detail">Platforms that scale to millions of daily transactions with five-nines habits.
       <p class="tags">AKS · Container Apps · Azure Functions · App Services · Cosmos DB · Azure SQL</p></div>
     </div>
     <div class="scope" onclick="this.classList.toggle('active')">
-      <h3>⚡ Event-Driven Architecture</h3>
-      <p class="hint">Tap to expand</p>
-      <div class="detail">Decoupled systems that stay fast under load — async messaging patterns that cut latency and let services scale independently.
+      <h3>⚡ Event-Driven Architecture</h3><p class="hint">Tap to expand</p>
+      <div class="detail">Decoupled systems that stay fast under load — async messaging that cuts latency and lets services scale independently.
       <p class="tags">Service Bus · Event Grid · Event Hub · RabbitMQ · CQRS · Saga Pattern</p></div>
     </div>
     <div class="scope" onclick="this.classList.toggle('active')">
-      <h3>🏛️ Enterprise Architecture &amp; Governance</h3>
-      <p class="hint">Tap to expand</p>
+      <h3>🏛️ Enterprise Architecture &amp; Governance</h3><p class="hint">Tap to expand</p>
       <div class="detail">Architecture that unblocks delivery — blueprints, ADRs and API governance that cut design debt 35% and rework 40%.
       <p class="tags">Target-State Blueprints · ADRs · Roadmaps · API Management · SOLID · NFRs</p></div>
     </div>
     <div class="scope" onclick="this.classList.toggle('active')">
-      <h3>🔐 Identity &amp; Platform Security</h3>
-      <p class="hint">Tap to expand</p>
+      <h3>🔐 Identity &amp; Platform Security</h3><p class="hint">Tap to expand</p>
       <div class="detail">Zero-breach identity rollouts across 10,000+ users — modern auth, centralized IAM and SOC 2-aligned engineering.
       <p class="tags">Entra ID · OAuth 2.0 · OpenID Connect · JWT · SSO · MFA · SAML · SOC 2</p></div>
     </div>
   </div>
-  <p class="scope-note">All six scopes reflect work delivered at PwC, Charles Schwab, Bank of America and Equifax.</p>
 </section>
 
-<section id="about" class="reveal">
-  <h2><span>03 /</span> About</h2>
+<section id="about" data-aos="fade-up">
+  <h2><span>03 /</span> About me</h2>
   <div class="about">
-    <p>AI-focused .NET engineering leader and enterprise solution architect with 15+ years delivering cloud-native platforms at Fortune 500 scale, including PwC, Charles Schwab, and Bank of America. Currently leads AI engineering delivery for PwC's AI-powered tax document platform while remaining hands-on with C#/.NET 8, Azure Functions, microservices, React.js, and CI/CD.</p>
-    <p>Introduced AI-assisted engineering workflows that increased feature throughput by approximately 30%, and reduced .NET service cold-start latency by 40% and deployment footprint by 30%.</p>
+    <p>I started building software in 2010 and spent the next decade-plus inside the systems people trust with their money and their mail — banks, brokerages, credit bureaus and the Postal Service. Somewhere along the way I stopped just writing code and started owning the whole arc: architecture, delivery, operations, and the team doing it.</p>
+    <p>Today I lead AI engineering at PwC, where my team ships an AI-powered tax document platform. I stay hands-on — C#/.NET 8, Azure Functions, React — because the fastest way to lead engineers is to still be one. My bias is simple: small, well-governed services, automated everything, and AI used where it actually moves a metric.</p>
+    <p>Outside work I'm in Dallas-Fort Worth, usually talking fantasy football or talking someone into a better deployment pipeline.</p>
   </div>
   <div class="stats">
-    <div class="stat"><b><span class="count" data-target="15">0</span>+</b><span>years in .NET &amp; Azure</span></div>
-    <div class="stat"><b><span class="count" data-target="99.95" data-decimals="2">0</span>%</b><span>uptime, financial platforms</span></div>
-    <div class="stat"><b><span class="count" data-target="2">0</span>M+</b><span>daily transactions</span></div>
-    <div class="stat"><b>~<span class="count" data-target="30">0</span>%</b><span>throughput lift from AI workflows</span></div>
+    <div class="stat"><b>15+</b><span>years in .NET &amp; Azure</span></div>
+    <div class="stat"><b>99.95%</b><span>uptime, financial platforms</span></div>
+    <div class="stat"><b>2M+</b><span>daily transactions</span></div>
+    <div class="stat"><b>~30%</b><span>throughput lift from AI workflows</span></div>
+  </div>
+  <h2 style="margin-top:2.5rem"><span>Certifications</span></h2>
+  <p>Microsoft Certified: Azure AI Engineer Associate (Feb 2025) · Microsoft Certified Professional · Microsoft Certified: .NET Framework – Application Development</p>
+  <p class="dim">Education: MS, Electrical, Electronics &amp; Communications Engineering — Southern Illinois University, Carbondale (2007–2008) · B.Tech, Electrical &amp; Electronics — Jawaharlal Nehru Technological University</p>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>04 /</span> What I'm learning now</h2>
+  <div class="learn">
+    <div><h3>🤖 Agentic AI workflows</h3><p>Multi-step agents that do real work inside governed enterprise systems — not just chat.</p></div>
+    <div><h3>⚙️ MLOps at scale</h3><p>Shipping, observing and retraining AI features with the same rigor as any production service.</p></div>
+    <div><h3>🏦 GenAI in regulated industries</h3><p>Applying generative AI where auditability, security and compliance are non-negotiable.</p></div>
   </div>
 </section>
 
-<section class="reveal">
-  <h2><span>04 /</span> Skills</h2>
+<section data-aos="fade-up">
+  <h2><span>05 /</span> Kind words</h2>
+  <blockquote>
+    "Akarsh is a very talented software professional with very strong technical knowledge — an excellent team player, with high integrity and work ethics."
+    <footer>— Santhakumaran Narayanan, Project Delivery Manager at Deloitte, via LinkedIn recommendation (2017)</footer>
+  </blockquote>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>06 /</span> Skills</h2>
   <div class="skills">
-    <span>GitHub Copilot</span><span>Azure OpenAI</span><span>LLM API Integration</span><span>Prompt Engineering</span><span>AI-Augmented Code Review</span>
+    <span>GitHub Copilot</span><span>Azure OpenAI</span><span>Azure AI</span><span>MLOps</span><span>LLM API Integration</span><span>Prompt Engineering</span><span>AI-Augmented Code Review</span>
     <span>C#</span><span>.NET 8</span><span>ASP.NET Core</span><span>Azure Functions</span><span>gRPC</span><span>REST APIs</span><span>Native AOT</span>
     <span>AKS</span><span>Container Apps</span><span>Service Bus</span><span>Event Grid</span><span>Event Hub</span><span>API Management</span><span>Entra ID</span><span>Azure SQL</span><span>Cosmos DB</span>
     <span>Microservices</span><span>Event-Driven Architecture</span><span>Cloud Modernization</span><span>ADRs</span><span>SOLID</span>
@@ -234,72 +304,75 @@
   </div>
 </section>
 
-<section class="reveal">
-  <h2><span>05 /</span> Experience</h2>
+<section data-aos="fade-up">
+  <h2><span>07 /</span> Experience</h2>
   <div class="job">
-    <h3>AI Technical Engineer Lead — PwC</h3>
+    <h3>AI .NET Engineer Lead — PwC</h3>
     <div class="meta">Dallas, TX · Feb 2026 – Present</div>
-    <ul>
-      <li>Lead and mentor 8 engineers delivering an AI-powered tax document platform.</li>
-      <li>Own Azure DevOps and GitHub CI/CD across two production tax applications.</li>
-      <li>Champion an organization-wide code-quality program: SME reviews, refactoring, automated NUnit testing, technical-debt reduction.</li>
-    </ul>
+    <ul><li>Lead and mentor 8 engineers delivering an AI-powered tax document platform.</li><li>Own Azure DevOps and GitHub CI/CD across two production tax applications.</li><li>Champion an organization-wide code-quality program: SME reviews, refactoring, automated NUnit testing, technical-debt reduction.</li></ul>
   </div>
   <div class="job">
-    <h3>Enterprise Solution Architect → Technical Lead — Charles Schwab</h3>
-    <div class="meta">Southlake, TX · Jan 2025 – Dec 2025</div>
-    <ul>
-      <li>Target-state blueprints cut design debt 35% in two quarters, unblocking 6 on-time releases.</li>
-      <li>Modernized CI/CD, cutting deployment time 60%; governed 12+ consumer APIs.</li>
-      <li>Native AOT optimization: cold-start latency −40%, deployment footprint −30%.</li>
-    </ul>
+    <h3>Senior Technical Team Lead — Charles Schwab</h3>
+    <div class="meta">Southlake, TX · Jan 2025 – Jan 2026</div>
+    <ul><li>Target-state blueprints cut design debt 35% in two quarters, unblocking 6 on-time releases.</li><li>Modernized CI/CD, cutting deployment time 60%; governed 12+ consumer APIs.</li><li>Native AOT optimization: cold-start latency −40%, deployment footprint −30%.</li></ul>
   </div>
   <div class="job">
-    <h3>Lead Full-Stack Developer — Bank of America</h3>
-    <div class="meta">Plano, TX · Apr 2023 – Dec 2024</div>
-    <ul>
-      <li>5M+ daily transactions at 99.9% availability, zero P1 incidents over 20 months.</li>
-      <li>Releases compressed from biweekly to weekly; hotfixes down 55%.</li>
-    </ul>
+    <h3>Senior Technical Lead — Bank of America</h3>
+    <div class="meta">Plano, TX · Mar 2023 – Jan 2025 (hybrid)</div>
+    <ul><li>5M+ daily transactions at 99.9% availability, zero P1 incidents over 20 months.</li><li>Releases compressed from biweekly to weekly; hotfixes down 55%.</li><li>React/TypeScript front ends with .NET back ends; Swagger UI API documentation.</li></ul>
   </div>
   <div class="job">
-    <h3>Full-Stack Developer — Equifax</h3>
-    <div class="meta">St. Louis, MO · Aug 2022 – Mar 2023</div>
-    <ul>
-      <li>3M+ consumer records at 99.8% data integrity; inter-service latency −40%.</li>
-    </ul>
+    <h3>Sr .NET Lead — Equifax</h3>
+    <div class="meta">Greater St. Louis · Aug 2022 – Mar 2023</div>
+    <ul><li>3M+ consumer records at 99.8% data integrity; inter-service latency −40%.</li></ul>
   </div>
-  <p class="dim">Earlier: USPS (2021–2022) · Verizon / Matilda (2018–2020) · State of Texas GLO (2017) · Charles Schwab, Austin (2016–2017) · General Motors (2015–2016) · Security Benefits Group (2014–2015) · State of Nevada (2014) · State of Missouri (2010–2014)</p>
-  <p class="dim">Education: Master's, Electronics &amp; Computer Science · Bachelor's, Electrical &amp; Electronics Engineering (JNTU) · Microsoft Certified, .NET Framework – Application Development</p>
+  <p class="dim">Earlier: .NET Development Lead — Charles Schwab, Chicago (2022) · Senior Software Engineer — USPS (2021–2022) · Sr. Full Stack Developer — Matilda Cloud Solutions (2018–2020) · Software Engineer Technical Lead — Verizon (2018–2020) · Web / ETL Lead Developer — Texas General Land Office, Austin (2017) · Senior Software Engineer — Charles Schwab, Austin (2016–2017)</p>
 </section>
 
+<section id="contact" data-aos="fade-up">
+  <h2><span>08 /</span> Contact</h2>
+  <p style="margin-bottom:1.25rem">Have a role, a platform to build, or a question? Send it here — it lands in my inbox.</p>
+  <form action="https://formsubmit.co/akarsh.ft@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Portfolio contact form">
+    <input type="hidden" name="_captcha" value="false">
+    <div><label for="cf-name">Name</label><input id="cf-name" type="text" name="name" required autocomplete="name"></div>
+    <div><label for="cf-email">Email</label><input id="cf-email" type="email" name="email" required autocomplete="email"></div>
+    <div><label for="cf-msg">Message</label><textarea id="cf-msg" name="message" rows="5" required></textarea></div>
+    <button class="btn btn-primary" type="submit">Send message →</button>
+  </form>
+  <p class="form-note" style="margin-top:1rem">Prefer email? <a href="mailto:akarsh.ft@gmail.com">akarsh.ft@gmail.com</a> · <a href="https://www.linkedin.com/in/akarsh-r" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/akarsh86" target="_blank" rel="noopener">GitHub</a></p>
+</section>
+</main>
+
 <footer>
-  <p>Let's build something. <a href="mailto:akarsh.ft@gmail.com">akarsh.ft@gmail.com</a> · <a href="https://www.linkedin.com/in/akarsh-r" target="_blank" rel="noopener">LinkedIn</a> · Dallas, TX</p>
+  <p>© 2026 Akarsh K · Dallas, TX · <a href="sitemap.xml">Sitemap</a> · Built with GitHub Pages</p>
 </footer>
 
 </div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  // scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // animated counters
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, target = parseFloat(el.dataset.target), dec = parseInt(el.dataset.decimals || '0');
-      const t0 = performance.now(), dur = 1400;
-      (function tick(now) {
-        const p = Math.min((now - t0) / dur, 1), ease = 1 - Math.pow(1 - p, 3);
-        el.textContent = (target * ease).toFixed(dec);
-        if (p < 1) requestAnimationFrame(tick);
-      })(t0);
-      cio.unobserve(el);
+  AOS.init({ duration: 700, once: true });
+  // theme toggle
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) root.setAttribute('data-theme', saved);
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+  // project filter
+  const btns = document.querySelectorAll('.filter-btn');
+  btns.forEach(btn => btn.addEventListener('click', () => {
+    btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+    btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#work .card').forEach(card => {
+      const cats = card.dataset.category.split(' ');
+      card.classList.toggle('hide', f !== 'all' && !cats.includes(f));
     });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.count').forEach(el => cio.observe(el));
+    AOS.refresh();
+  }));
 </script>
 </body>
 </html>
