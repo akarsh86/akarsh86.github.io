@@ -1,28 +1,39 @@
 # Akarsh K — Portfolio
 
-AI .NET Engineering Lead · Enterprise Solution Architect · Dallas, TX
+![Live](https://img.shields.io/badge/live-akarsh86.github.io-brightgreen)
+![HTML](https://img.shields.io/badge/HTML5-single--page-orange)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-- **LinkedIn:** https://www.linkedin.com/in/akarsh-r
-- **Email:** akarsh.ft@gmail.com
-- **Focus:** .NET 8 / Azure · AI-Assisted Engineering · React.js · Cloud Modernization
+Personal portfolio of **Akarsh K** — AI .NET Engineering Lead / MLOps Engineer, Dallas, TX.
 
-## About
+**Live site:** https://akarsh86.github.io/
 
-AI-focused .NET engineering leader and enterprise solution architect with 15+ years delivering cloud-native platforms at Fortune 500 scale, including PwC, Charles Schwab, and Bank of America. Currently leads AI engineering delivery for PwC's AI-powered tax document platform.
+## What's on it
 
-## Highlights
+- One-line value statement, professional photo, and a clear **Hire me** call-to-action above the fold
+- Four enterprise case studies (PwC, Charles Schwab, Bank of America, Equifax) with the problem, my role, tech stack, and outcomes — filterable by focus area
+- Interactive modern-scopes section, dark/light mode toggle, and scroll animations (AOS)
+- Testimonial, "About me" story, "What I'm learning" section, and a working contact form
+- Downloadable résumé ([resume.pdf](https://akarsh86.github.io/resume.pdf))
 
-- 99.95% uptime on financial platforms
-- 2M+ daily transactions handled
-- ~30% feature-throughput lift from AI-assisted engineering workflows
-- 40% .NET cold-start latency reduction with Native AOT
+## Preview
 
-## Experience
+![Portfolio preview](https://akarsh86.github.io/assets/og-image.png)
 
-- **AI Technical Engineer Lead — PwC** (Dallas, TX · Feb 2026–Present)
-- **Enterprise Solution Architect → Technical Lead — Charles Schwab** (Southlake, TX · 2025)
-- **Lead Full-Stack Developer — Bank of America** (Plano, TX · 2023–2024)
-- **Full-Stack Developer — Equifax** (St. Louis, MO · 2022–2023)
-- **Lead / Full-Stack Developer — Charles Schwab** (Raleigh, NC · 2022)
+## Run it locally
 
-See `index.html` for the full portfolio site, published with GitHub Pages.
+```bash
+# any static file server works, for example:
+python3 -m http.server 8000
+# then open http://localhost:8000
+```
+
+No build step. The page is a single `index.html` plus images under `assets/`.
+
+## Tech
+
+HTML · CSS · JavaScript · AOS animations · GitHub Pages
+
+## Deploy
+
+Pushing to `main` redeploys automatically via the GitHub Actions workflow in `.github/workflows/pages.yml`.
