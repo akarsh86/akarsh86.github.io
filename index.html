@@ -125,12 +125,33 @@
   .form-note { color:var(--muted); font-size:.9rem; }
   footer { padding-top:2.5rem; border-top:1px solid var(--line); color:var(--muted); font-size:.95rem; }
   footer a { color:var(--text); font-weight:600; }
+  /* scroll progress */
+  .progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,#38bdf8,#a78bfa,#f472b6); width:0; z-index:50; }
+  /* cursor glow */
+  .cursor-glow { position:fixed; width:340px; height:340px; border-radius:50%; pointer-events:none; z-index:0; background:radial-gradient(circle, rgba(56,189,248,.14), transparent 60%); transform:translate(-50%,-50%); }
+  @media (pointer:coarse) { .cursor-glow { display:none; } }
+  /* springy cards + shine sweep */
+  .card { position:relative; overflow:hidden; transition:transform .5s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease, border-color .3s ease, opacity .25s ease; }
+  .card::after { content:""; position:absolute; inset:0; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.13) 50%, transparent 60%); transform:translateX(-130%); transition:transform .9s ease; pointer-events:none; }
+  .card:hover::after { transform:translateX(130%); }
+  .card-out { opacity:0 !important; transform:scale(.96) !important; }
+  /* marquee */
+  .marquee { overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:1rem 0; white-space:nowrap; }
+  .marquee-track { display:inline-flex; gap:2.5rem; animation:scroll 30s linear infinite; font-weight:700; font-size:1.05rem; color:var(--muted); will-change:transform; }
+  .marquee-track b { color:var(--accent); }
+  @keyframes scroll { to { transform:translateX(-50%); } }
+  .marquee:hover .marquee-track { animation-play-state:paused; }
+  /* rotating word */
+  #rotWord { display:inline-block; color:var(--accent); transition:opacity .4s, transform .4s; }
+  #rotWord.out { opacity:0; transform:translateY(12px); }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation:none !important; transition:none !important; }
   }
 </style>
 </head>
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 <div class="orbs" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
 <div class="wrap">
 
@@ -153,7 +174,7 @@
       <span class="badge">● Available for AI engineering leadership roles</span>
       <p class="hi">Hi! I'm Akarsh.</p>
       <h1>AI .NET Engineering Lead <span class="grad">&amp; MLOps Engineer</span></h1>
-      <p class="value">I build AI-powered platforms for enterprises that need scale, security, and speed.</p>
+      <p class="value">I build AI-powered platforms for enterprises that need <span id="rotWord">scale</span>.</p>
       <p class="sub">15+ years shipping cloud-native platforms at PwC, Charles Schwab, Bank of America and Equifax. Microsoft Certified: Azure AI Engineer Associate.</p>
       <div class="cta">
         <a class="btn btn-primary" href="mailto:akarsh.ft@gmail.com?subject=Hiring%20inquiry%20from%20your%20portfolio">Hire me →</a>
@@ -167,6 +188,8 @@
     </div>
   </div>
 </header>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span>AI Platforms <b>✦</b> Cloud-Native <b>✦</b> MLOps <b>✦</b> Fintech <b>✦</b> Event-Driven <b>✦</b> Enterprise Architecture <b>✦</b> GenAI <b>✦</b> .NET 8 <b>✦</b> Azure <b>✦</b> React <b>✦</b>&nbsp;</span><span>AI Platforms <b>✦</b> Cloud-Native <b>✦</b> MLOps <b>✦</b> Fintech <b>✦</b> Event-Driven <b>✦</b> Enterprise Architecture <b>✦</b> GenAI <b>✦</b> .NET 8 <b>✦</b> Azure <b>✦</b> React <b>✦</b>&nbsp;</span></div></div>
 
 <main>
 <section id="work" data-aos="fade-up">
@@ -262,10 +285,10 @@
     <p>Outside work I'm in Dallas-Fort Worth, usually talking fantasy football or talking someone into a better deployment pipeline.</p>
   </div>
   <div class="stats">
-    <div class="stat"><b>15+</b><span>years in .NET &amp; Azure</span></div>
-    <div class="stat"><b>99.95%</b><span>uptime, financial platforms</span></div>
-    <div class="stat"><b>2M+</b><span>daily transactions</span></div>
-    <div class="stat"><b>~30%</b><span>throughput lift from AI workflows</span></div>
+    <div class="stat"><b><span class="count" data-target="15">0</span>+</b><span>years in .NET &amp; Azure</span></div>
+    <div class="stat"><b><span class="count" data-target="99.95" data-decimals="2">0</span>%</b><span>uptime, financial platforms</span></div>
+    <div class="stat"><b><span class="count" data-target="2">0</span>M+</b><span>daily transactions</span></div>
+    <div class="stat"><b>~<span class="count" data-target="30">0</span>%</b><span>throughput lift from AI workflows</span></div>
   </div>
   <h2 style="margin-top:2.5rem"><span>Certifications</span></h2>
   <p>Microsoft Certified: Azure AI Engineer Associate (Feb 2025) · Microsoft Certified Professional · Microsoft Certified: .NET Framework – Application Development</p>
@@ -367,12 +390,74 @@
     btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
     btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
     const f = btn.dataset.filter;
-    document.querySelectorAll('#work .card').forEach(card => {
-      const cats = card.dataset.category.split(' ');
-      card.classList.toggle('hide', f !== 'all' && !cats.includes(f));
-    });
-    AOS.refresh();
+    const cards = document.querySelectorAll('#work .card');
+    cards.forEach(c => c.classList.add('card-out'));
+    setTimeout(() => {
+      cards.forEach(card => {
+        const cats = card.dataset.category.split(' ');
+        card.classList.toggle('hide', f !== 'all' && !cats.includes(f));
+        card.classList.remove('card-out');
+      });
+      AOS.refresh();
+    }, 200);
   }));
+  // scroll progress
+  const prog = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+  // cursor glow, parallax orbs, magnetic buttons, 3D tilt (fine pointers only)
+  const fine = matchMedia('(pointer:fine)').matches;
+  if (fine) {
+    const glow = document.getElementById('cursorGlow');
+    const orbs = document.querySelectorAll('.orb');
+    addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+      const nx = (e.clientX / innerWidth - .5), ny = (e.clientY / innerHeight - .5);
+      orbs.forEach((o, i) => { o.style.translate = `${nx * (20 + i * 12)}px ${ny * (16 + i * 10)}px`; });
+    }, { passive: true });
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * .18}px, ${(e.clientY - r.top - r.height/2) * .3}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+    document.querySelectorAll('#work .card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const rx = ((e.clientY - r.top) / r.height - .5) * -8;
+        const ry = ((e.clientX - r.left) / r.width - .5) * 10;
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+  // rotating word
+  const words = ['scale', 'security', 'speed', 'reliability', 'momentum'];
+  let wi = 0;
+  const rot = document.getElementById('rotWord');
+  setInterval(() => {
+    rot.classList.add('out');
+    setTimeout(() => { wi = (wi + 1) % words.length; rot.textContent = words[wi]; rot.classList.remove('out'); }, 400);
+  }, 2400);
+  // count-up stats
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target, target = parseFloat(el.dataset.target), dec = parseInt(el.dataset.decimals || '0');
+      const t0 = performance.now(), dur = 1500;
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1), ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * ease).toFixed(dec);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => cio.observe(el));
 </script>
 </body>
 </html>
