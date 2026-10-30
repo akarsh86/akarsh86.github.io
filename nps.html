@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>National Park Service — Accessible Redesign | Akarsh K</title>
+<meta name="description" content="Concept case study: making the National Park Service website more accessible and inclusive. Original UX research by Aditya, adapted for Akarsh K's portfolio with an engineering take on the accessibility profiles.">
+<link rel="canonical" href="https://akarsh86.github.io/nps.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="National Park Service — Accessible Redesign">
+<meta property="og:description" content="Empowering the National Park Service to become more inclusive. Accessibility score 76% to 92%.">
+<meta property="og:url" content="https://akarsh86.github.io/nps.html">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<style>
+  :root { --bg:#0b0f1a; --bg2:#111827; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.12); --text:#f1f5f9; --muted:#94a3b8; --accent:#38bdf8; --accent2:#a78bfa; }
+  [data-theme="light"] { --bg:#fafaf9; --bg2:#ffffff; --card:#ffffff; --line:#e7e5e4; --text:#1c1917; --muted:#57534e; --accent:#0284c7; --accent2:#7c3aed; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; transition:background .3s, color .3s; }
+  a { color:var(--accent); text-decoration:none; }
+  a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:6px; }
+  .wrap { max-width:1000px; margin:0 auto; padding:1.25rem 1.5rem 4rem; position:relative; z-index:1; }
+  .orbs { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .orb { position:absolute; border-radius:50%; filter:blur(90px); opacity:.3; animation:drift 18s ease-in-out infinite alternate; }
+  .orb.o1 { width:420px; height:420px; background:#0ea5e9; top:-120px; left:-80px; }
+  .orb.o2 { width:360px; height:360px; background:#8b5cf6; top:30%; right:-100px; animation-delay:-6s; }
+  .orb.o3 { width:300px; height:300px; background:#f43f5e; bottom:-100px; left:35%; animation-delay:-12s; }
+  [data-theme="light"] .orb { opacity:.18; }
+  @keyframes drift { from { transform:translate(0,0) scale(1); } to { transform:translate(60px,40px) scale(1.15); } }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 0 2rem; }
+  nav .name { font-weight:800; font-size:1.1rem; }
+  .nav-right { display:flex; gap:1rem; align-items:center; }
+  nav .nav-links { display:flex; gap:1.25rem; font-size:.95rem; }
+  nav .nav-links a { color:var(--muted); }
+  nav .nav-links a:hover { color:var(--text); }
+  .theme-btn { background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:999px; padding:.4rem .8rem; cursor:pointer; font-size:.9rem; }
+  .badge { display:inline-block; font-size:.85rem; color:var(--accent); border:1px solid var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent); border-radius:999px; padding:.35rem .9rem; margin-bottom:1.25rem; }
+  .tags { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+  .tags span { background:var(--card); border:1px solid var(--line); border-radius:999px; padding:.35rem .9rem; font-size:.9rem; }
+  h1 { font-size:2.6rem; line-height:1.12; letter-spacing:-.02em; margin:.5rem 0 1rem; }
+  h1 .grad { background:linear-gradient(90deg,#38bdf8,#a78bfa,#f472b6,#38bdf8); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lede { font-size:1.25rem; font-weight:600; max-width:720px; }
+  .sub { color:var(--muted); margin-top:.75rem; max-width:720px; }
+  section { padding:2.5rem 0; border-top:1px solid var(--line); }
+  h2 { font-size:.85rem; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin-bottom:1.25rem; }
+  h2 span { color:var(--accent); }
+  h3 { font-size:1.25rem; margin:1.25rem 0 .5rem; }
+  p { opacity:.9; margin-bottom:.75rem; max-width:760px; }
+  ul { padding-left:1.25rem; opacity:.9; max-width:760px; }
+  li { margin-bottom:.4rem; }
+  .note { background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:0 16px 16px 0; padding:1.1rem 1.25rem; max-width:760px; margin:1rem 0; }
+  .note p { margin-bottom:.4rem; }
+  .overview { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+  .overview div { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.1rem; }
+  .overview h3 { font-size:.85rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin:0 0 .35rem; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+  @media (max-width:680px){ .grid{ grid-template-columns:1fr; } h1{ font-size:2rem; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:1.4rem; transition:transform .3s ease, border-color .3s ease; }
+  .card:hover { transform:translateY(-4px); border-color:var(--accent); }
+  .card h3 { margin-top:0; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin-top:1rem; }
+  .stat { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1.1rem; text-align:center; }
+  .stat b { display:block; font-size:1.7rem; color:var(--accent); }
+  .stat span { color:var(--muted); font-size:.9rem; }
+  .profile-bar { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0; }
+  .profile-btn { background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; font-size:.92rem; }
+  .profile-btn.active { background:linear-gradient(90deg,#0284c7,#7c3aed); color:#fff; border-color:transparent; }
+  .btn { display:inline-block; padding:.75rem 1.5rem; border-radius:999px; font-weight:700; border:none; cursor:pointer; font-size:1rem; background:linear-gradient(90deg,#0284c7,#7c3aed); color:#fff; }
+  .btn-ghost { border:1px solid var(--line); color:var(--text); background:transparent; }
+  .cta { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem; }
+  footer { padding-top:2.5rem; border-top:1px solid var(--line); color:var(--muted); font-size:.95rem; }
+  footer a { color:var(--text); font-weight:600; }
+  .progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,#38bdf8,#a78bfa,#f472b6); width:0; z-index:50; }
+  /* Live accessibility profiles — try them on this page */
+  body.profile-seizure *, body.profile-seizure *::before, body.profile-seizure *::after { animation:none !important; transition:none !important; }
+  body.profile-vision { font-size:112%; }
+  body.profile-vision p, body.profile-vision li { color:#fff; }
+  body.profile-vision .card, body.profile-vision .stat, body.profile-vision .overview div { border-color:#fff; }
+  body.profile-adhd .orb, body.profile-adhd .note { display:none; }
+  body.profile-adhd p, body.profile-adhd li { max-width:620px; }
+  body.profile-cognitive h1 { font-size:2rem; }
+  body.profile-cognitive p, body.profile-cognitive li { font-size:1.05rem; line-height:1.8; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="orbs" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="wrap">
+
+<header>
+  <nav aria-label="Main navigation">
+    <div class="name"><a href="index.html" style="color:var(--text)">Akarsh<span style="color:var(--accent)">.dev</span></a></div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark and light mode">🌙 / ☀️</button>
+    </div>
+  </nav>
+  <p><a href="index.html#work">← Back to all case studies</a></p>
+  <span class="badge">Concept case study · Accessibility (A11Y)</span>
+  <h1>National Park Service <span class="grad">UX</span></h1>
+  <p class="lede">Empowering the National Park Service to become more inclusive.</p>
+  <div class="tags"><span>A11Y</span><span>Web</span><span>UX Research &amp; Interaction Design</span></div>
+  <div class="note">
+    <p><b>About this page:</b> this is a concept case study, adapted for Akarsh's portfolio from the original NPS accessibility research by Aditya — <a href="https://adtiyaux.com/nps" target="_blank" rel="noopener">adtiyaux.com/nps</a>.</p>
+    <p>The research, surveys, interviews and usability testing below are Aditya's work, not Akarsh's. Akarsh's contribution here is the engineering lens at the end — how these accessibility profiles could actually be built, shipped and kept working in production.</p>
+  </div>
+</header>
+
+<main>
+<section data-aos="fade-up">
+  <h2><span>01 /</span> Overview</h2>
+  <div class="overview">
+    <div><h3>Role — original study</h3><p>UX Researcher</p></div>
+    <div><h3>Responsibilities</h3><p>User research, UX/UI design, usability testing, interaction design</p></div>
+    <div><h3>Timeline</h3><p>14 weeks</p></div>
+    <div><h3>Collaborators</h3><p>2 designers</p></div>
+  </div>
+  <h3>How might we make the NPS website more accessible and inclusive?</h3>
+  <p>NPS supports about 318 million visitors every year. Under the Americans with Disabilities Act (ADA), any web product or service needs to be fully accessible.</p>
+  <p>Upon talking to a few users with special needs, Aditya found their pain points and concluded that the NPS website was not A11Y-friendly. This project aims to come up with A11Y recommendations.</p>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>02 /</span> The solution — four accessibility profiles</h2>
+  <p>Try them on this page — they actually work here:</p>
+  <div class="profile-bar" role="group" aria-label="Accessibility profiles">
+    <button class="profile-btn" data-profile="seizure">Seizure Safe</button>
+    <button class="profile-btn" data-profile="vision">Vision Impaired</button>
+    <button class="profile-btn" data-profile="adhd">ADHD Friendly</button>
+    <button class="profile-btn" data-profile="cognitive">Cognitive Disability</button>
+    <button class="profile-btn" id="profileReset">Reset</button>
+  </div>
+  <div class="grid">
+    <article class="card"><h3>Seizure Safe Profile</h3><p>Reduces risks for users prone to seizures by eliminating flashing lights, rapid animations, and certain color contrasts.</p></article>
+    <article class="card"><h3>Vision Impaired Profile</h3><p>Makes websites readable by screen readers and offers visual adjustments for those with vision impairments, simplifying navigation through keyboard shortcuts and enhancing readability with contrast and font changes.</p></article>
+    <article class="card"><h3>ADHD Friendly Profile</h3><p>Minimizes distractions with a clean layout, reduces motion, and highlights essential information to aid users with ADHD in focusing on key content.</p></article>
+    <article class="card"><h3>Cognitive Disability Profile</h3><p>Designs for ease of use with predictable navigation, simple language, and supportive visuals to help users with cognitive impairments understand and interact with digital content more easily.</p></article>
+  </div>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>03 /</span> Investigating the problem</h2>
+  <p>To address the objective of enhancing the accessibility and inclusivity of the NPS website, the investigation involved:</p>
+  <ul>
+    <li>Heuristic evaluation</li>
+    <li>Conducting user surveys</li>
+    <li>Conducting an accessibility audit of the NPS website under Web Content Accessibility Guidelines (WCAG) 2.1</li>
+  </ul>
+  <p><b>The website remained non-compliant with the accessibility standards, with a score of 76%</b> — highlighting crucial areas needing improvement to achieve full accessibility for all users.</p>
+  <h3>User research</h3>
+  <p>Research and design, from initial concept to final execution, organized the results into a few categories: heuristic evaluations, user surveys, user interviews, prototypes, and usability test results.</p>
+  <h3>Heuristic evaluation</h3>
+  <p>Jakob Nielsen's 10 usability guidelines were examined, with issues measured on Molich and Jeffries' severity scale — minor, serious, and catastrophic. This revealed areas for improvement, particularly in enhancing the UI and alternative text for images, and ensuring all functionality is accessible via keyboard navigation for screen readers.</p>
+  <h3>Surveys &amp; results</h3>
+  <p>Surveys collected feedback from a wide array of users, including those with special needs, focusing on challenges and desired improvements in website navigation, content clarity, and overall satisfaction. Responses indicated a critical need for enhanced accessibility options for users with visual and cognitive disabilities, along with improvements to the user interface for a better visual experience.</p>
+  <h3>Usability test &amp; results</h3>
+  <p>After thorough user research, a usability test plan led to testing <b>10 specific tasks with 5 participants</b> in a remote, moderated setup. The outcomes revealed a range of serious issues, from significant obstacles to major problems. Navigating the media gallery section stood out as particularly challenging, and overall, tasks took longer to complete than expected.</p>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>04 /</span> Scope for redesign</h2>
+  <ul>
+    <li>Accessibility enhancements</li>
+    <li>Navigation and readability improvements</li>
+    <li>Content clarity and simplification</li>
+    <li>Enhance UI to make users connected</li>
+  </ul>
+  <h3>Designs</h3>
+  <p>Prototypes were developed to address issues identified in earlier evaluations, then pushed for a round of testing with 5 participants, with in-depth positive outcomes. <b>The average time to finish a task reduced to 5.1 seconds, with an increase of 80% efficiency (previous: 10 seconds).</b></p>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>05 /</span> User impact</h2>
+  <div class="stats">
+    <div class="stat"><b>76% → 92%</b><span>Accessibility score, post-redesign</span></div>
+    <div class="stat"><b>−15%</b><span>Bounce rate</span></div>
+    <div class="stat"><b>+30%</b><span>User satisfaction</span></div>
+    <div class="stat"><b>+20%</b><span>Engagement — avg. time on site</span></div>
+  </div>
+  <p style="margin-top:1rem">Post-redesign, the website's accessibility score increased from 76% to 92%. The bounce rate decreased by 15%. User satisfaction surveys post-redesign showed a 30% increase in positive feedback. Metrics revealed a 20% increase in the average time spent on the site per visit.</p>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>06 /</span> How I'd engineer it — Akarsh's take</h2>
+  <p>A good accessibility profile is not a theme toggle — it is a user preference that has to survive navigation, work on every page, and never regress. This is how I would build it:</p>
+  <ul>
+    <li><b>Profiles as persisted preferences:</b> store the chosen profile server-side / in local storage, apply it before first paint, and respect <code>prefers-reduced-motion</code> and <code>prefers-contrast</code> by default.</li>
+    <li><b>One design-token system:</b> contrast, font size, spacing and motion driven by tokens, so a profile changes the whole site — not a handful of pages.</li>
+    <li><b>Keyboard-first, always:</b> visible focus, logical tab order, skip links, and full screen-reader coverage — tested, not assumed.</li>
+    <li><b>Accessibility in CI:</b> automated WCAG / axe checks on every pull request, so a new feature cannot ship a 76% regression.</li>
+    <li><b>Built for scale:</b> the same patterns I use in production — .NET / Azure, feature flags for a gradual rollout, and telemetry on profile usage and task completion, so the 76% → 92% claim is measured, not guessed.</li>
+  </ul>
+</section>
+
+<section data-aos="fade-up">
+  <h2><span>07 /</span> Key takeaways</h2>
+  <ul>
+    <li><b>User feedback is invaluable:</b> engaging with real users, especially those with disabilities, provided insights no automated tool could. Their feedback was crucial in identifying areas for improvement and validating the redesign.</li>
+    <li><b>Continuous improvement is essential:</b> continuous monitoring and iteration based on user feedback and evolving standards are crucial to maintaining and improving accessibility.</li>
+    <li><b>Principle of inclusivity:</b> this project set a precedent for future work, emphasizing that at the heart of great design is the principle of inclusivity, ensuring digital experiences are accessible and enjoyable for everyone.</li>
+    <li><b>Accessibility enhances overall user experience:</b> the improvements that help users with disabilities — clearer navigation, simpler language, less motion — make the site better for everyone.</li>
+  </ul>
+  <div class="cta">
+    <a class="btn" href="index.html#work">← Back to case studies</a>
+    <a class="btn btn-ghost" href="https://adtiyaux.com/nps" target="_blank" rel="noopener">Original case study ↗</a>
+  </div>
+  <p class="sub" style="margin-top:1rem">Source: Aditya's NPS UX case study, <a href="https://adtiyaux.com/nps" target="_blank" rel="noopener">adtiyaux.com/nps</a>. Figures quoted from that study.</p>
+</section>
+</main>
+
+<footer>
+  <p>© 2026 Akarsh K · Dallas, TX · <a href="index.html">Home</a> · <a href="sitemap.xml">Sitemap</a> · Built with GitHub Pages</p>
+</footer>
+
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true });
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) root.setAttribute('data-theme', saved);
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+  addEventListener('scroll', () => {
+    const h = document.documentElement;
+    document.getElementById('progress').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+  // Accessibility profile toggles — live demo on this page
+  const profileBtns = document.querySelectorAll('.profile-btn[data-profile]');
+  profileBtns.forEach(btn => btn.addEventListener('click', () => {
+    const name = btn.dataset.profile;
+    const wasActive = btn.classList.contains('active');
+    profileBtns.forEach(b => b.classList.remove('active'));
+    document.body.classList.remove('profile-seizure','profile-vision','profile-adhd','profile-cognitive');
+    if (!wasActive) {
+      btn.classList.add('active');
+      document.body.classList.add('profile-' + name);
+      localStorage.setItem('nps-profile', name);
+    } else {
+      localStorage.removeItem('nps-profile');
+    }
+  }));
+  document.getElementById('profileReset').addEventListener('click', () => {
+    profileBtns.forEach(b => b.classList.remove('active'));
+    document.body.classList.remove('profile-seizure','profile-vision','profile-adhd','profile-cognitive');
+    localStorage.removeItem('nps-profile');
+  });
+  const savedProfile = localStorage.getItem('nps-profile');
+  if (savedProfile) {
+    const btn = document.querySelector('.profile-btn[data-profile="' + savedProfile + '"]');
+    if (btn) { btn.classList.add('active'); document.body.classList.add('profile-' + savedProfile); }
+  }
+</script>
+</body>
+</html>
